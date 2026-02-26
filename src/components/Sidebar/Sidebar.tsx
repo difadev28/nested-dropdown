@@ -132,8 +132,8 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
                         type="button"
                         onClick={() => navigate('/', { replace: true })}
                         disabled={!hasFilters}
-                        className="mt-auto py-3 md:py-4 text-[10px] md:text-xs font-medium border-2 rounded-xl md:rounded-2xl
-                     bg-blue-50 transition-colors
+                        className="py-3 md:py-4 text-[10px] md:text-xs font-medium border-2 rounded-xl md:rounded-2xl
+                     bg-blue-50 transition-colors mt-5
                      disabled:opacity-40 disabled:cursor-not-allowed uppercase flex items-center justify-center border-blue-700 gap-1.5 md:gap-2 text-gray-800 cursor-pointer"
                     >
                         <img src="/icons/off.svg" width={12} className="md:w-[14px]" alt="" />
