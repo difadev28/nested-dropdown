@@ -10,7 +10,7 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
     return (
-        <nav aria-label="breadcrumb" className="breadcrumb flex items-center gap-1 md:gap-1.5 font-semibold text-[12px] md:text-sm text-gray-500">
+        <nav aria-label="breadcrumb" className="breadcrumb flex items-center gap-1 md:gap-1.5 font-semibold text-[12px] md:text-sm text-gray-500 flex-wrap">
             <Link to="/" className="hover:text-gray-800 transition-colors">
                 {province ? 'Indonesia' : 'Home'}
             </Link>

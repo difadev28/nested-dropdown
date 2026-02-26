@@ -23,7 +23,7 @@ function RegionCard({ label, value, isActive }: RegionCardProps) {
             <span
                 className={cn(
                     'font-semibold text-center break-words max-w-full px-2',
-                    isActive ? 'text-black text-3xl md:text-5xl lg:text-7xl' : 'text-gray-300 text-sm md:text-base ',
+                    isActive ? 'text-black text-3xl md:text-3xl xl:text-4xl 2xl:text-7xl' : 'text-gray-300 text-sm md:text-base ',
                 )}
             >
                 {value ?? '—'}
@@ -52,10 +52,10 @@ export function RegionSummary({ province, regency, district }: RegionSummaryProp
     }
 
     return (
-        <div className="flex flex-col gap-4 md:gap-6 items-center justify-center mt-4 md:mt-8">
+        <div className="flex flex-col gap-2 2xl:gap-4 md:gap-6 items-center justify-center 2xl:mt-4 md:mt-3">
 
             {/* Detail cards grid — always all three rendered, never unmounted */}
-            <div className="flex flex-col gap-6 md:gap-10 items-center justify-center">
+            <div className="flex flex-col gap-4  md:gap-3 2xl:gap-6 items-center justify-center">
                 <RegionCard label="Provinsi" value={province.name} isActive />
                 <img src="/icons/arrow-down.png" width="18" className="md:w-[24px]" alt="" />
                 <RegionCard label="Kota / Kabupaten" value={regency?.name ?? null} isActive={!!regency} />
