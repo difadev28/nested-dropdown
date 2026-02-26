@@ -1,5 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useRouteLoaderData } from 'react-router-dom';
+import { useNavigate, useSearchParams, useRouteLoaderData } from 'react-router-dom';
 import { Combobox } from '@/components/Combobox';
 import type { LoaderData } from '@/features/region/types';
 
@@ -26,54 +25,60 @@ export function Sidebar() {
 
     // ── Cascade-reset handlers ───────────────────────────────────────────────────
     function handleProvinceChange(value: string) {
-        if (!value) {
-            navigate('/', { replace: true });
-        } else {
+        if (value) {
             navigate(`?province=${value}`, { replace: true });
+        } else {
+            navigate('/', { replace: true });
         }
     }
 
     function handleRegencyChange(value: string) {
         const pId = searchParams.get('province');
-        if (!value) {
-            navigate(`?province=${pId}`, { replace: true });
-        } else {
+        if (value) {
             navigate(`?province=${pId}&regency=${value}`, { replace: true });
+        } else {
+            navigate(`?province=${pId}`, { replace: true });
         }
     }
 
     function handleDistrictChange(value: string) {
         const pId = searchParams.get('province');
         const rId = searchParams.get('regency');
-        if (!value) {
-            navigate(`?province=${pId}&regency=${rId}`, { replace: true });
-        } else {
+        if (value) {
             navigate(`?province=${pId}&regency=${rId}&district=${value}`, { replace: true });
+        } else {
+            navigate(`?province=${pId}&regency=${rId}`, { replace: true });
         }
     }
 
     return (
-        <aside className="flex flex-col w-64 h-full bg-white border-r border-gray-200 shrink-0">
+        <aside className="flex flex-col w-80 h-full border-r border-gray-200 shrink-0">
             {/* Logo */}
-            <div className="flex items-center h-16 px-4 border-b border-gray-200 shrink-0">
-                <span className="text-sm font-bold tracking-wide text-gray-800 uppercase">
-                    Wilayah App
-                </span>
+            <div className="flex items-center h-16 px-8 shrink-0">
+                <div className='flex flex-row items-center gap-2 mt-7'>
+                    <div className='p-2 bg-blue-50 rounded-full'>
+                        <img src="/icons/globe.svg" width={24} alt="" />
+                    </div>
+                    <span className="font-bold tracking-wide text-gray-800">
+                        Frontend Assestment
+                    </span>
+                </div>
             </div>
 
             {/* Filter dropdowns */}
-            <div className="flex flex-col flex-1 overflow-y-auto p-4 gap-5">
+            <div className="flex flex-col flex-1 overflow-y-auto p-8 gap-5 mt-8">
                 <p className="text-xs font-semibold tracking-wider text-gray-400 uppercase">
                     Filter Wilayah
                 </p>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6 mt-8">
                     <Combobox
                         name="province"
                         label="Provinsi"
                         options={provinces}
                         value={provinceValue}
                         onChange={handleProvinceChange}
+                        icon="/icons/map.png"
                     />
                     <Combobox
                         name="regency"
@@ -82,6 +87,7 @@ export function Sidebar() {
                         value={regencyValue}
                         onChange={handleRegencyChange}
                         disabled={!selected.provinceId}
+                        icon="/icons/building.png"
                     />
                     <Combobox
                         name="district"
@@ -90,20 +96,22 @@ export function Sidebar() {
                         value={districtValue}
                         onChange={handleDistrictChange}
                         disabled={!selected.regencyId}
+                        icon="/icons/marker.png"
                     />
+                    <button
+                        type="button"
+                        onClick={() => navigate('/', { replace: true })}
+                        disabled={!hasFilters}
+                        className="mt-auto py-4 text-xs font-medium border-2 rounded-2xl
+                     bg-blue-50 transition-colors
+                     disabled:opacity-40 disabled:cursor-not-allowed uppercase flex items-center justify-center border-blue-700 gap-2 text-gray-800 cursor-pointer"
+                    >
+                        <img src="/icons/off.svg" width={14} alt="" />
+                        <span>Reset</span>
+                    </button>
                 </div>
 
                 {/* Reset */}
-                <button
-                    type="button"
-                    onClick={() => navigate('/', { replace: true })}
-                    disabled={!hasFilters}
-                    className="mt-auto py-1.5 text-xs font-medium text-red-500 border border-red-200 rounded-md
-                     hover:bg-red-50 transition-colors
-                     disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                    Reset Filter
-                </button>
             </div>
         </aside>
     );

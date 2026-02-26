@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import type { LoaderData } from '@/features/region/types';
-import { Breadcrumb } from '@/components/Breadcrumb';
+import { Breadcrumb } from '../Breadcrumb';
 
 export function Header() {
     const { provinces, regencies, districts, selected } = useLoaderData() as LoaderData;

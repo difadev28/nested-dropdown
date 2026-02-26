@@ -10,19 +10,21 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
     return (
-        <nav aria-label="breadcrumb" className="breadcrumb flex items-center gap-1.5 text-sm text-gray-500">
+        <nav aria-label="breadcrumb" className="breadcrumb flex items-center gap-1.5 font-semibold text-sm text-gray-500">
             <Link to="/" className="hover:text-gray-800 transition-colors">
-                Home
+                {province ? 'Indonesia' : 'Home'}
             </Link>
 
             {province && (
                 <>
-                    <span className="text-gray-300" aria-hidden="true">/</span>
+                    <span className="text-gray-300" aria-hidden="true">
+                        <img src="/icons/chevron-right.svg" className='mt-1' width="13" alt="" />
+                    </span>
                     <Link
                         to={`?province=${province.id}`}
                         className={cn(
                             'hover:text-gray-800 transition-colors',
-                            !regency && 'text-gray-800 font-medium',
+                            !regency && 'text-blue-700 font-medium',
                         )}
                         {...(!regency ? { 'aria-current': 'page' as const } : {})}
                     >
@@ -33,12 +35,14 @@ export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
 
             {regency && (
                 <>
-                    <span className="text-gray-300" aria-hidden="true">/</span>
+                    <span className="text-gray-300" aria-hidden="true">
+                        <img src="/icons/chevron-right.svg" className='mt-1' width="13" alt="" />
+                    </span>
                     <Link
                         to={`?province=${province!.id}&regency=${regency.id}`}
                         className={cn(
                             'hover:text-gray-800 transition-colors',
-                            !district && 'text-gray-800 font-medium',
+                            !district && 'text-blue-700 font-medium',
                         )}
                         {...(!district ? { 'aria-current': 'page' as const } : {})}
                     >
@@ -49,9 +53,11 @@ export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
 
             {district && (
                 <>
-                    <span className="text-gray-300" aria-hidden="true">/</span>
+                    <span className="text-gray-300" aria-hidden="true">
+                        <img src="/icons/chevron-right.svg" className='mt-1' width="13" alt="" />
+                    </span>
                     <span
-                        className="text-gray-800 font-medium"
+                        className="text-blue-700 font-medium"
                         aria-current="page"
                     >
                         {district.name}

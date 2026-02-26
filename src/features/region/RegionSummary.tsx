@@ -13,19 +13,17 @@ function RegionCard({ label, value, isActive }: RegionCardProps) {
     return (
         <div
             className={cn(
-                'flex flex-col gap-1 p-4 rounded-xl border transition-colors',
-                isActive
-                    ? 'border-blue-200 bg-blue-50'
-                    : 'border-gray-200 bg-white opacity-50',
+                'flex flex-col gap-5 p-4 rounded-xl items-center justify-center transition-colors',
+                !isActive && 'opacity-50',
             )}
         >
-            <span className="text-xs font-semibold tracking-wide text-gray-400 uppercase">
+            <span className="text-xs font-semibold text-blue-500 tracking-wide uppercase">
                 {label}
             </span>
             <span
                 className={cn(
-                    'text-base font-semibold',
-                    isActive ? 'text-blue-700' : 'text-gray-300',
+                    'font-semibold',
+                    isActive ? 'text-black text-7xl' : 'text-gray-300 text-base ',
                 )}
             >
                 {value ?? '—'}
@@ -54,16 +52,22 @@ export function RegionSummary({ province, regency, district }: RegionSummaryProp
     }
 
     return (
-        <div className="flex flex-col gap-6">
-            {/* Page title — most specific selected name */}
-            <h1 className="text-xl font-semibold text-gray-800">
-                {district?.name ?? regency?.name ?? province.name}
-            </h1>
+        <div className="flex flex-col gap-6 items-center justify-center mt-8">
 
             {/* Detail cards grid — always all three rendered, never unmounted */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="flex flex-col gap-10 items-center justify-center">
                 <RegionCard label="Provinsi" value={province.name} isActive />
+                {
+                    !!province && (
+                        <img src="/icons/arrow-down.png" width="24" alt="" />
+                    )
+                }
                 <RegionCard label="Kota / Kabupaten" value={regency?.name ?? null} isActive={!!regency} />
+                {
+                    !!regency && (
+                        <img src="/icons/arrow-down.png" width="24" alt="" />
+                    )
+                }
                 <RegionCard label="Kecamatan" value={district?.name ?? null} isActive={!!district} />
             </div>
         </div>
