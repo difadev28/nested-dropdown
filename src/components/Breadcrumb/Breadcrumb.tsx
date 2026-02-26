@@ -18,7 +18,7 @@ export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
             {province && (
                 <>
                     <span className="text-gray-300" aria-hidden="true">
-                        <img src="/icons/chevron-right.svg" className='mt-1' width="11" className="md:w-[13px]" alt="" />
+                        <img src="/icons/chevron-right.svg" className='mt-1 md:w-[13px]' width="11" alt="" />
                     </span>
                     <Link
                         to={`?province=${province.id}`}
@@ -36,7 +36,7 @@ export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
             {regency && (
                 <>
                     <span className="text-gray-300" aria-hidden="true">
-                        <img src="/icons/chevron-right.svg" className='mt-1' width="11" className="md:w-[13px]" alt="" />
+                        <img src="/icons/chevron-right.svg" width="11" className="md:w-[13px] mt-1" alt="" />
                     </span>
                     <Link
                         to={`?province=${province!.id}&regency=${regency.id}`}
@@ -54,7 +54,7 @@ export function Breadcrumb({ province, regency, district }: BreadcrumbProps) {
             {district && (
                 <>
                     <span className="text-gray-300" aria-hidden="true">
-                        <img src="/icons/chevron-right.svg" className='mt-1' width="11" className="md:w-[13px]" alt="" />
+                        <img src="/icons/chevron-right.svg" width="11" className="md:w-[13px] mt-1" alt="" />
                     </span>
                     <span
                         className="text-blue-700 font-medium truncate max-w-[120px] md:max-w-none"

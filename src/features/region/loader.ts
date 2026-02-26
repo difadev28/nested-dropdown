@@ -1,8 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router-dom';
-import { provinces } from '@/data/provinces';
-import { regencies } from '@/data/regencies';
-import { districts } from '@/data/districts';
-import type { LoaderData } from './types';
+import type { LoaderData, Province, Regency, District } from './types';
 
 export async function regionLoader({ request }: LoaderFunctionArgs): Promise<LoaderData> {
     const url = new URL(request.url);
@@ -10,10 +7,20 @@ export async function regionLoader({ request }: LoaderFunctionArgs): Promise<Loa
     const regencyId = Number(url.searchParams.get('regency')) || null;
     const districtId = Number(url.searchParams.get('district')) || null;
 
+    const [provincesRes, regenciesRes, districtsRes] = await Promise.all([
+        fetch('/data/provinces.json'),
+        fetch('/data/regencies.json'),
+        fetch('/data/districts.json'),
+    ]);
+
+    const provinces: Province[] = await provincesRes.json();
+    const regencies: Regency[] = await regenciesRes.json();
+    const districts: District[] = await districtsRes.json();
+
     return {
         provinces,
-        regencies,   // full list — sidebar filters client-side
-        districts,   // full list — sidebar filters client-side
+        regencies,
+        districts,
         selected: { provinceId, regencyId, districtId },
     };
 }
